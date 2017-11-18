@@ -8,12 +8,11 @@ import {
   startReportingRuntimeErrors,
   stopReportingRuntimeErrors,
 } from 'react-error-overlay';
-import fetch from 'node-fetch';
 
 setEditorHandler((errorLocation) => {
   const fileName = encodeURIComponent(errorLocation.fileName);
   const lineNumber = encodeURIComponent(errorLocation.lineNumber || 1);
-  fetch(
+  global.fetch(
     // Keep in sync with react-dev-utils/errorOverlayMiddleware
     `${launchEditorEndpoint}?fileName=${fileName}&lineNumber=${lineNumber}`,
   );
