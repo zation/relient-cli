@@ -1,0 +1,98 @@
+{
+  "name": "relient-cli",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=6.5",
+    "npm": ">=3.10"
+  },
+  "bin": {
+    "relient": "./bin/relient.js"
+  },
+  "dependencies": {
+    "@babel/core": "7.0.0-beta.32",
+    "@babel/plugin-transform-react-constant-elements": "7.0.0-beta.32",
+    "@babel/plugin-transform-react-inline-elements": "7.0.0-beta.32",
+    "@babel/polyfill": "7.0.0-beta.32",
+    "@babel/preset-env": "7.0.0-beta.32",
+    "@babel/preset-flow": "7.0.0-beta.32",
+    "@babel/preset-react": "7.0.0-beta.32",
+    "@babel/preset-stage-2": "7.0.0-beta.32",
+    "@babel/register": "^7.0.0-beta.32",
+    "assets-webpack-plugin": "^3.5.1",
+    "autoprefixer": "^7.1.6",
+    "babel-loader": "^8.0.0-beta.0",
+    "babel-plugin-import": "^1.6.2",
+    "babel-plugin-lodash": "^3.3.2",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.10",
+    "body-parser": "^1.18.2",
+    "browser-sync": "^2.18.13",
+    "chokidar": "^1.7.0",
+    "cors": "^2.8.4",
+    "css-loader": "^0.28.7",
+    "express": "^4.16.2",
+    "file-loader": "^1.1.5",
+    "glob": "^7.1.2",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "lodash": "^4.17.4",
+    "mkdirp": "^0.5.1",
+    "morgan": "^1.9.0",
+    "node-fetch": "^1.7.3",
+    "pixrem": "^4.0.1",
+    "pleeease-filters": "^4.0.0",
+    "postcss-calc": "^6.0.1",
+    "postcss-color-function": "^4.0.1",
+    "postcss-custom-media": "^6.0.0",
+    "postcss-custom-properties": "^6.2.0",
+    "postcss-custom-selectors": "^4.0.1",
+    "postcss-flexbugs-fixes": "^3.2.0",
+    "postcss-import": "^11.0.0",
+    "postcss-loader": "^2.0.8",
+    "postcss-media-minmax": "^3.0.0",
+    "postcss-nested": "^2.1.2",
+    "postcss-nesting": "^4.2.1",
+    "postcss-selector-matches": "^3.0.1",
+    "postcss-selector-not": "^3.0.1",
+    "raw-loader": "^0.5.1",
+    "react-dev-utils": "^4.2.1",
+    "react-error-overlay": "^3.0.0",
+    "require-dir": "^0.3.2",
+    "rimraf": "^2.6.2",
+    "source-map-support": "^0.5.0",
+    "webpack": "^3.8.1",
+    "webpack-bundle-analyzer": "^2.9.1",
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-hot-middleware": "^2.20.0",
+    "webpack-node-externals": "^1.6.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.0.0-beta.32",
+    "babel-eslint": "^8.0.2",
+    "eslint": "^4.10.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-css-modules": "^2.7.5",
+    "eslint-plugin-import": "^2.8.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^5.0.0",
+    "prettier": "^1.8.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{json}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "precommit": "lint-staged",
+    "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
+    "fix-js": "yarn run lint-js --fix",
+    "fix": "yarn run fix-js && yarn run fix-css",
+    "build": "rm -rf ./dist && mkdir ./dist && cp ./package.json ./dist/ && babel ./src --out-dir ./dist --source-maps inline",
+    "pub": "npm run build && npm publish ./dist"
+  }
+}
