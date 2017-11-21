@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-
-import run from '../tools/run';
+require('@babel/register');
+const run = require('../tools/run');
 
 if (require.main === module && process.argv.length > 2) {
   // eslint-disable-next-line no-underscore-dangle

@@ -18,7 +18,9 @@ import {
   devtool,
   publicPath,
   devtoolModuleFilenameTemplate,
+  plugins,
 } from './base';
+import { getConfig } from '../config';
 
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));
@@ -76,12 +78,13 @@ export default {
   devtool,
 
   plugins: [
+    ...getConfig('webpack.clientPlugins'),
+    ...plugins,
+
     // Define free variables
     // https://webpack.js.org/plugins/define-plugin/
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
       __BROWSER__: true,
-      __DEV__: isDebug,
     }),
 
     // Emit a file with assets paths

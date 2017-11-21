@@ -1,4 +1,5 @@
 import path from 'path';
+import webpack from 'webpack';
 
 export const isDebug = !process.argv.includes('--release');
 export const isVerbose = process.argv.includes('--verbose');
@@ -240,3 +241,10 @@ export const stats = {
 // Choose a developer tool to enhance debugging
 // https://webpack.js.org/configuration/devtool/#devtool
 export const devtool = isDebug ? 'cheap-module-inline-source-map' : 'source-map';
+
+export const plugins = [
+  new webpack.DefinePlugin({
+    'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
+    __DEV__: isDebug,
+  }),
+];

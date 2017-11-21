@@ -18,7 +18,9 @@ import {
   devtoolModuleFilenameTemplate,
   reStyle,
   reImage,
+  plugins,
 } from './base';
+import { serverConfig, getConfig } from '../config';
 
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));
@@ -81,12 +83,14 @@ export default {
   ],
 
   plugins: [
+    ...getConfig('webpack.serverPlugins'),
+    ...plugins,
+
     // Define free variables
     // https://webpack.js.org/plugins/define-plugin/
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
       __BROWSER__: false,
-      __DEV__: isDebug,
+      __RELIENT_CONFIG__: JSON.stringify(serverConfig),
     }),
 
     // Adds a banner to the top of each generated chunk

@@ -91,7 +91,6 @@
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
     "fix-js": "yarn run lint-js --fix",
     "fix": "yarn run fix-js && yarn run fix-css",
-    "build": "rm -rf ./dist && mkdir ./dist && cp ./package.json ./dist/ && babel ./src --out-dir ./dist --source-maps inline",
     "pub": "npm run build && npm publish ./dist"
   }
 }
