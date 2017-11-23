@@ -90,7 +90,6 @@
     "precommit": "lint-staged",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
     "fix-js": "yarn run lint-js --fix",
-    "fix": "yarn run fix-js && yarn run fix-css",
-    "pub": "npm run build && npm publish ./dist"
+    "fix": "yarn run fix-js && yarn run fix-css"
   }
 }
