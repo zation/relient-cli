@@ -1,12 +1,12 @@
 {
   "name": "relient-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "node": ">=6.5",
     "npm": ">=3.10"
   },
   "bin": {
-    "relient": "./bin/relient.js"
+    "relient": "./src/bin/relient.js"
   },
   "dependencies": {
     "@babel/core": "7.0.0-beta.32",

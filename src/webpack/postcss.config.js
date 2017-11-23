@@ -1,11 +1,12 @@
 const path = require('path');
+const { getConfig } = require('../config');
 
 /* eslint-disable global-require */
 
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));
 
-module.exports = () => ({
+const defaultConfig = {
   // The list of plugins for PostCSS
   // https://github.com/postcss/postcss
   plugins: [
@@ -58,4 +59,6 @@ module.exports = () => ({
       flexbox: 'no-2009',
     }),
   ],
-});
+};
+
+module.exports = () => getConfig('postcss')(defaultConfig);

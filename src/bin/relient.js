@@ -1,5 +1,15 @@
 #!/usr/bin/env node
-require('@babel/register');
+require('@babel/polyfill');
+require('@babel/register')({
+  // This will override `node_modules` ignoring - you can alternatively pass
+  // an array of strings to be explicitly matched or a regex / glob
+  ignore: [(file) => {
+    if (file.match(/relient-cli\/src/)) {
+      return false;
+    }
+    return file.match(/node_modules/);
+  }],
+});
 const run = require('../tools/run');
 
 if (require.main === module && process.argv.length > 2) {

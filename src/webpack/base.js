@@ -156,7 +156,10 @@ export const styleRule = {
   ],
 };
 
-export const getStaticRules = ({ name, publicPath: staticPublicPath }) => ([
+const staticFileName = isDebug ? '[path][name].[ext]?[hash:8]' : '[hash:8].[ext]';
+export const getStaticRules = ({
+  emitFile,
+} = {}) => ([
   {
     test: reImage,
     oneOf: [
@@ -169,9 +172,9 @@ export const getStaticRules = ({ name, publicPath: staticPublicPath }) => ([
             test: /\.svg$/,
             loader: 'svg-url-loader',
             options: {
-              name,
-              publicPath: staticPublicPath,
+              name: staticFileName,
               limit: 4 * kb,
+              emitFile,
             },
           },
 
@@ -179,9 +182,9 @@ export const getStaticRules = ({ name, publicPath: staticPublicPath }) => ([
           {
             loader: 'url-loader',
             options: {
-              name,
-              publicPath: staticPublicPath,
+              name: staticFileName,
               limit: 4 * kb,
+              emitFile,
             },
           },
         ],
@@ -191,8 +194,8 @@ export const getStaticRules = ({ name, publicPath: staticPublicPath }) => ([
       {
         loader: 'file-loader',
         options: {
-          name,
-          publicPath: staticPublicPath,
+          name: staticFileName,
+          emitFile,
         },
       },
     ],
@@ -203,8 +206,8 @@ export const getStaticRules = ({ name, publicPath: staticPublicPath }) => ([
     exclude: [reScript, reStyle, reImage],
     loader: 'file-loader',
     options: {
-      name,
-      publicPath: staticPublicPath,
+      name: staticFileName,
+      emitFile,
     },
   },
 ]);

@@ -4,7 +4,6 @@ import webpack from 'webpack';
 import {
   context,
   isVerbose,
-  isDebug,
   resolve,
   styleRule,
   getJSRule,
@@ -25,11 +24,7 @@ import { serverConfig, getConfig } from '../config';
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));
 
-const staticAssetName = isDebug
-  ? '[path][name].[ext]?[hash:8]'
-  : '[hash:8].[ext]';
-
-export default {
+const defaultServerWebpack = {
   name: 'server',
 
   target: 'node',
@@ -62,7 +57,7 @@ export default {
         },
       }),
       styleRule,
-      ...getStaticRules({ name: staticAssetName }),
+      ...getStaticRules({ emitFile: false }),
       ...excludeDevModulesRules,
     ],
   },
@@ -83,7 +78,6 @@ export default {
   ],
 
   plugins: [
-    ...getConfig('webpack.serverPlugins'),
     ...plugins,
 
     // Define free variables
@@ -113,3 +107,5 @@ export default {
     __dirname: false,
   },
 };
+
+export default getConfig('serverWebpack')(defaultServerWebpack);

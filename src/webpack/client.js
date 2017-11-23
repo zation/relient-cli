@@ -25,11 +25,7 @@ import { getConfig } from '../config';
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));
 
-const staticAssetName = isDebug
-  ? '[path][name].[ext]?[hash:8]'
-  : '[hash:8].[ext]';
-
-export default {
+const defaultClientWebpack = {
   name: 'client',
 
   target: 'web',
@@ -45,9 +41,7 @@ export default {
     publicPath,
     pathinfo: isVerbose,
     filename: isDebug ? '[name].js' : '[name].[chunkhash:8].js',
-    chunkFilename: isDebug
-      ? '[name].chunk.js'
-      : '[name].[chunkhash:8].chunk.js',
+    chunkFilename: isDebug ? '[name].chunk.js' : '[name].[chunkhash:8].chunk.js',
     devtoolModuleFilenameTemplate,
   },
 
@@ -64,7 +58,7 @@ export default {
         },
       }),
       styleRule,
-      ...getStaticRules({ name: staticAssetName }),
+      ...getStaticRules(),
       ...excludeDevModulesRules,
     ],
   },
@@ -78,7 +72,6 @@ export default {
   devtool,
 
   plugins: [
-    ...getConfig('webpack.clientPlugins'),
     ...plugins,
 
     // Define free variables
@@ -144,3 +137,5 @@ export default {
     tls: 'empty',
   },
 };
+
+export default getConfig('clientWebpack')(defaultClientWebpack);

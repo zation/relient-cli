@@ -94,6 +94,7 @@ async function start() {
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.NamedModulesPlugin(),
   );
+  serverConfig.entry.server = serverConfig.entry.server.filter(entry => entry !== '@babel/register');
 
   // Configure compilation
   await run(clean);
