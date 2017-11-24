@@ -20,7 +20,7 @@ import {
   devtoolModuleFilenameTemplate,
   plugins,
 } from './base';
-import { getConfig } from '../config';
+import getConfig from '../config';
 
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));

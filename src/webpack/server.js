@@ -19,7 +19,7 @@ import {
   reImage,
   plugins,
 } from './base';
-import { serverConfig, getConfig } from '../config';
+import getConfig from '../config';
 
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));
@@ -73,7 +73,7 @@ const defaultServerWebpack = {
   externals: [
     './assets.json',
     nodeExternals({
-      whitelist: [reStyle, reImage, 'relient'],
+      whitelist: [reStyle, reImage],
     }),
   ],
 
@@ -84,7 +84,6 @@ const defaultServerWebpack = {
     // https://webpack.js.org/plugins/define-plugin/
     new webpack.DefinePlugin({
       __BROWSER__: false,
-      __RELIENT_CONFIG__: JSON.stringify(serverConfig),
     }),
 
     // Adds a banner to the top of each generated chunk

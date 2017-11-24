@@ -1,5 +1,5 @@
 const path = require('path');
-const { getConfig } = require('../config');
+const getConfig = require('../config').default;
 
 /* eslint-disable global-require */
 

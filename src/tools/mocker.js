@@ -6,9 +6,9 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import { forEach, flow } from 'lodash/fp';
 
-import { getConfig } from '../config';
+import getConfig from '../config';
 
-export default async function mocker() {
+async function mocker() {
   const app = express();
   app.use(morgan('dev'));
   app.use(cors());
@@ -29,8 +29,10 @@ export default async function mocker() {
   )(path.resolve('./mocker'));
   app.use(router);
 
-  app.listen(getConfig('port'), () => {
+  app.listen(getConfig('mockerPort'), () => {
     // eslint-disable-next-line
-    console.log(`Mock server is running on port ${getConfig('port')}`);
+    console.log(`Mock server is running on port ${getConfig('mockerPort')}`);
   });
 }
+
+export default mocker;

@@ -10,7 +10,7 @@ require('@babel/register')({
     return file.match(/node_modules/);
   }],
 });
-const run = require('../tools/run');
+const run = require('../tools/run').default;
 
 if (require.main === module && process.argv.length > 2) {
   // eslint-disable-next-line no-underscore-dangle

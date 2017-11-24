@@ -1,4 +1,18 @@
-import { flow, pick, keys, omit, propertyOf, camelCase, identity } from 'lodash/fp';
+import { propertyOf, identity, isFunction, isNumber, forEach } from 'lodash/fp';
+
+const defaultConfig = {
+  clientWebpack: identity,
+  serverWebpack: identity,
+  postcss: identity,
+  mockerPort: 9001,
+};
+
+const configSchema = [
+  ['clientWebpack', isFunction, 'function'],
+  ['serverWebpack', isFunction, 'function'],
+  ['postcss', isFunction, 'function'],
+  ['mockerPort', isNumber, 'number'],
+];
 
 let customConfig = {};
 try {
@@ -8,21 +22,13 @@ try {
 } catch (error) {
 }
 
-const defaultConfig = {
-  apiDomain: 'http://localhost:9001/api',
-  port: 3000,
-  clientConfigs: ['apiDomain'],
-  clientWebpack: identity,
-  serverWebpack: identity,
-  postcss: identity,
-};
+forEach(([key, validate, type]) => {
+  if (customConfig[key] && !validate(customConfig[key])) {
+    throw new Error(`relient.config.js ${key} should be ${type}.`);
+  }
+})(configSchema);
 
-const config = {
+export default propertyOf({
   ...defaultConfig,
   ...customConfig,
-  ...flow(camelCase, pick(keys(defaultConfig)))(process.env),
-};
-
-export const getConfig = propertyOf(config);
-
-export const serverConfig = omit(['clientConfigs', 'clientWebpack', 'serverWebpack', 'postcss'])(config);
+});
