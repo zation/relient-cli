@@ -1,10 +1,22 @@
-import { propertyOf, identity, isFunction, isNumber, forEach } from 'lodash/fp';
+import {
+  propertyOf,
+  identity,
+  isFunction,
+  isNumber,
+  isString,
+  forEach,
+  isArray,
+  omit,
+} from 'lodash/fp';
 
 const defaultConfig = {
   clientWebpack: identity,
   serverWebpack: identity,
   postcss: identity,
   mockerPort: 9001,
+  apiDomain: 'http://localhost:9001',
+  port: 3000,
+  clientConfigs: ['apiDomain'],
 };
 
 const configSchema = [
@@ -12,6 +24,9 @@ const configSchema = [
   ['serverWebpack', isFunction, 'function'],
   ['postcss', isFunction, 'function'],
   ['mockerPort', isNumber, 'number'],
+  ['apiDomain', isString, 'string'],
+  ['port', isNumber, 'number'],
+  ['clientConfigs', isArray, 'array'],
 ];
 
 let customConfig = {};
@@ -28,7 +43,16 @@ forEach(([key, validate, type]) => {
   }
 })(configSchema);
 
-export default propertyOf({
+const config = {
   ...defaultConfig,
   ...customConfig,
-});
+};
+
+export const serverConfig = omit([
+  'clientWebpack',
+  'serverWebpack',
+  'postcss',
+  'mockerPort',
+])(config);
+
+export default propertyOf(config);
