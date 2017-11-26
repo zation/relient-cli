@@ -99,8 +99,10 @@ export const styleRule = {
         minimize: isDebug ? false : minimizeCssOptions,
       },
     },
+
+    // Process internal/project styles without css module (from src folder)
     {
-      test: /_\.less$/,
+      test: /_\./,
       include: path.resolve('./src'),
       loader: 'css-loader',
       options: {
@@ -109,7 +111,7 @@ export const styleRule = {
       },
     },
 
-    // Process internal/project styles (from src folder)
+    // Process internal/project styles with css module (from src folder)
     {
       test: /[^_]\./,
       include: path.resolve('./src'),
@@ -149,10 +151,10 @@ export const styleRule = {
     // Compile Sass to CSS
     // https://github.com/webpack-contrib/sass-loader
     // Install dependencies before uncommenting: yarn add --dev sass-loader node-sass
-    // {
-    //   test: /\.(scss|sass)$/,
-    //   loader: 'sass-loader',
-    // },
+    {
+      test: /\.(scss|sass)$/,
+      loader: 'sass-loader',
+    },
   ],
 };
 
