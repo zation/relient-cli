@@ -50,6 +50,8 @@ function createCompilationPromise(name, compiler, config) {
 }
 
 let server;
+const notPolyfill = entry => entry !== '@babel/polyfill' && entry !== 'babel-polyfill';
+const notNullLoader = ({ loader }) => loader !== 'null-loader';
 
 /**
  * Launches a development web server with "live reload" functionality -
@@ -86,15 +88,13 @@ async function start() {
   serverConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json';
   serverConfig.output.hotUpdateChunkFilename =
     'updates/[id].[hash].hot-update.js';
-  serverConfig.module.rules = serverConfig.module.rules.filter(
-    x => x.loader !== 'null-loader',
-  );
+  serverConfig.module.rules = serverConfig.module.rules.filter(notNullLoader);
   serverConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.NamedModulesPlugin(),
   );
-  serverConfig.entry.server = serverConfig.entry.server.filter(entry => entry !== '@babel/register');
+  serverConfig.entry.server = serverConfig.entry.server.filter(notPolyfill);
 
   // Configure compilation
   await run(clean);

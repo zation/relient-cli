@@ -1,6 +1,6 @@
 {
   "name": "relient-cli",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "engines": {
     "node": ">=6.5",
     "npm": ">=3.10"

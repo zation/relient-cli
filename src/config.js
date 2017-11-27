@@ -8,6 +8,8 @@ import {
   isArray,
   omit,
 } from 'lodash/fp';
+import path from 'path';
+import { existsSync } from 'fs';
 
 const defaultConfig = {
   clientWebpack: identity,
@@ -29,13 +31,9 @@ const configSchema = [
   ['clientConfigs', isArray, 'array'],
 ];
 
-let customConfig = {};
-try {
-  // eslint-disable-next-line
-  customConfig = require(path.resolve('./relient.config.js'));
-  // eslint-disable-next-line
-} catch (error) {
-}
+const customConfigPath = path.resolve('./relient.config.js');
+// eslint-disable-next-line import/no-dynamic-require
+const customConfig = existsSync(customConfigPath) ? require(customConfigPath).default : {};
 
 forEach(([key, validate, type]) => {
   if (customConfig[key] && !validate(customConfig[key])) {
