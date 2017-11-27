@@ -2396,7 +2396,7 @@ file-entry-cache@^2.0.0:
     flat-cache "^1.2.1"
     object-assign "^4.0.1"
 
-file-loader@^1.1.5:
+file-loader@1.1.5, file-loader@^1.1.5:
   version "1.1.5"
   resolved "http://registry.npm.taobao.org/file-loader/download/file-loader-1.1.5.tgz#91c25b6b6fbe56dae99f10a425fd64933b5c9daa"
   dependencies:
@@ -3427,7 +3427,7 @@ loader-runner@^2.3.0:
   version "2.3.0"
   resolved "http://registry.npm.taobao.org/loader-runner/download/loader-runner-2.3.0.tgz#f482aea82d543e07921700d5a46ef26fdac6b8a2"
 
-loader-utils@^1.0.2, loader-utils@^1.1.0:
+loader-utils@1.1.0, loader-utils@^1.0.2, loader-utils@^1.1.0:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/loader-utils/download/loader-utils-1.1.0.tgz#c98aef488bcceda2ffb5e2de646d6a754429f5cd"
   dependencies:
@@ -3724,6 +3724,10 @@ mime@1.4.1, mime@^1.2.11, mime@^1.3.4:
 "mime@>= 0.0.1":
   version "2.0.3"
   resolved "http://registry.npm.taobao.org/mime/download/mime-2.0.3.tgz#4353337854747c48ea498330dc034f9f4bbbcc0b"
+
+mime@^1.4.1:
+  version "1.6.0"
+  resolved "http://registry.npm.taobao.org/mime/download/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
 
 mimic-fn@^1.0.0:
   version "1.1.0"
@@ -5586,6 +5590,13 @@ supports-color@^4.0.0, supports-color@^4.2.1, supports-color@^4.4.0:
   dependencies:
     has-flag "^2.0.0"
 
+svg-url-loader@^2.3.0:
+  version "2.3.0"
+  resolved "http://registry.npm.taobao.org/svg-url-loader/download/svg-url-loader-2.3.0.tgz#6ea03f387ed09be1a8f270df6849573deca717b3"
+  dependencies:
+    file-loader "1.1.5"
+    loader-utils "1.1.0"
+
 svgo@^0.7.0:
   version "0.7.2"
   resolved "http://registry.npm.taobao.org/svgo/download/svgo-0.7.2.tgz#9f5772413952135c6fefbf40afe6a4faa88b4bb5"
@@ -5815,6 +5826,14 @@ universalify@^0.1.0:
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/unpipe/download/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
+
+url-loader@^0.6.2:
+  version "0.6.2"
+  resolved "http://registry.npm.taobao.org/url-loader/download/url-loader-0.6.2.tgz#a007a7109620e9d988d14bce677a1decb9a993f7"
+  dependencies:
+    loader-utils "^1.0.2"
+    mime "^1.4.1"
+    schema-utils "^0.3.0"
 
 url-parse@1.0.x:
   version "1.0.5"
