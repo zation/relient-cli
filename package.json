@@ -1,6 +1,6 @@
 {
   "name": "relient-cli",
-  "version": "0.0.13",
+  "version": "0.0.16",
   "engines": {
     "node": ">=6.5",
     "npm": ">=3.10"
@@ -21,8 +21,6 @@
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^7.1.6",
     "babel-loader": "^8.0.0-beta.0",
-    "babel-plugin-import": "^1.6.2",
-    "babel-plugin-lodash": "^3.3.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.10",
     "body-parser": "^1.18.2",
     "browser-sync": "^2.18.13",

@@ -1,5 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
+import getConfig from '../config';
 
 export const isDebug = !process.argv.includes('--release');
 export const isVerbose = process.argv.includes('--verbose');
@@ -75,8 +76,7 @@ export const getJSRule = ({ targets }) => ({
       // Remove unnecessary React propTypes from the production build
       // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types
       ...(isDebug ? [] : ['transform-react-remove-prop-types']),
-      ['import', { libraryName: 'antd', style: false }],
-      ['lodash', { id: ['lodash', 'recompose'] }],
+      ...getConfig('babelPlugins'),
     ],
   },
 });

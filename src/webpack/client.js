@@ -2,7 +2,10 @@ import path from 'path';
 import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
 import BundleAnalyzerPlugin from 'webpack-bundle-analyzer';
-import {
+import * as base from './base';
+import getConfig from '../config';
+
+const {
   context,
   isVerbose,
   isDebug,
@@ -19,9 +22,7 @@ import {
   publicPath,
   devtoolModuleFilenameTemplate,
   plugins,
-} from './base';
-import getConfig from '../config';
-
+} = base;
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));
 
@@ -138,4 +139,10 @@ const defaultClientWebpack = {
   },
 };
 
-export default getConfig('clientWebpack')(defaultClientWebpack);
+export default getConfig('clientWebpack')({
+  config: defaultClientWebpack,
+  ...base,
+  webpack,
+  AssetsPlugin,
+  BundleAnalyzerPlugin,
+});

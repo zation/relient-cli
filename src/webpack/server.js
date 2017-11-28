@@ -1,7 +1,10 @@
 import path from 'path';
 import nodeExternals from 'webpack-node-externals';
 import webpack from 'webpack';
-import {
+import * as base from './base';
+import getConfig, { serverConfig } from '../config';
+
+const {
   context,
   isVerbose,
   resolve,
@@ -18,9 +21,7 @@ import {
   reStyle,
   reImage,
   plugins,
-} from './base';
-import getConfig, { serverConfig } from '../config';
-
+} = base;
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));
 
@@ -107,4 +108,9 @@ const defaultServerWebpack = {
   },
 };
 
-export default getConfig('serverWebpack')(defaultServerWebpack);
+export default getConfig('serverWebpack')({
+  config: defaultServerWebpack,
+  ...base,
+  webpack,
+  nodeExternals,
+});
