@@ -7,13 +7,14 @@ import {
   forEach,
   isArray,
   omit,
+  prop,
 } from 'lodash/fp';
 import path from 'path';
 import { existsSync } from 'fs';
 
 const defaultConfig = {
-  clientWebpack: identity,
-  serverWebpack: identity,
+  clientWebpack: prop('config'),
+  serverWebpack: prop('config'),
   postcss: identity,
   mockerPort: 9001,
   apiDomain: 'http://localhost:9001',
