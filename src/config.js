@@ -19,6 +19,7 @@ const defaultConfig = {
   apiDomain: 'http://localhost:9001',
   port: 3000,
   clientConfigs: ['apiDomain'],
+  babelPlugins: [],
 };
 
 const configSchema = [
@@ -29,6 +30,7 @@ const configSchema = [
   ['apiDomain', isString, 'string'],
   ['port', isNumber, 'number'],
   ['clientConfigs', isArray, 'array'],
+  ['babelPlugins', isArray, 'array'],
 ];
 
 const customConfigPath = path.resolve('./relient.config.js');
