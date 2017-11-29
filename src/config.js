@@ -4,6 +4,7 @@ import {
   isFunction,
   isNumber,
   isString,
+  isObject,
   forEach,
   isArray,
   omit,
@@ -21,6 +22,11 @@ const defaultConfig = {
   port: 3000,
   clientConfigs: ['apiDomain'],
   babelPlugins: [],
+  proxy: {
+    from: ['/api'],
+    target: 'http://localhost:9001',
+    changeOrigin: true,
+  },
 };
 
 const configSchema = [
@@ -32,6 +38,7 @@ const configSchema = [
   ['port', isNumber, 'number'],
   ['clientConfigs', isArray, 'array'],
   ['babelPlugins', isArray, 'array'],
+  ['proxy', isObject, 'object'],
 ];
 
 const customConfigPath = path.resolve('./relient.config.js');

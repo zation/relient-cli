@@ -5,6 +5,8 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
+import proxy from 'http-proxy-middleware';
+import getConfig from '../config';
 import clientConfig from '../webpack/client';
 import serverConfig from '../webpack/server';
 import run, { format } from './run';
@@ -62,6 +64,11 @@ async function start() {
   server = express();
   server.use(errorOverlayMiddleware());
   server.use(express.static(path.resolve('./public')));
+  const proxyConfig = getConfig('proxy');
+  if (proxyConfig) {
+    const { from, ...proxyOptions } = proxyConfig;
+    server.use(from, proxy(proxyOptions));
+  }
 
   // Configure client-side hot module replacement
   clientConfig.entry.client = [path.resolve(__dirname, './lib/webpackHotDevClient.js')]
