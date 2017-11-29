@@ -12,7 +12,7 @@ import serverConfig from '../webpack/server';
 import run, { format } from './run';
 import clean from './clean';
 
-const isDebug = !process.argv.includes('--release');
+const isDebug = process.env.NODE_ENV !== 'production';
 
 // https://webpack.js.org/configuration/watch/#watchoptions
 const watchOptions = {

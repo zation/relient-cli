@@ -1,6 +1,6 @@
 {
   "name": "relient-cli",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "engines": {
     "node": ">=6.5",
     "npm": ">=3.10"
@@ -36,6 +36,7 @@
     "lodash": "^4.17.4",
     "mkdirp": "^0.5.1",
     "morgan": "^1.9.0",
+    "null-loader": "^0.1.1",
     "pixrem": "^4.0.1",
     "pleeease-filters": "^4.0.0",
     "postcss-calc": "^6.0.1",

@@ -2,7 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import getConfig from '../config';
 
-export const isDebug = !process.argv.includes('--release');
+export const isDebug = process.env.NODE_ENV !== 'production';
 export const isVerbose = process.argv.includes('--verbose');
 export const isAnalyze = process.argv.includes('--analyze') || process.argv.includes('--analyse');
 
