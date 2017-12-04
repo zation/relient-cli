@@ -105,6 +105,7 @@ const defaultServerWebpack = {
     process: false,
     Buffer: false,
     __dirname: false,
+    __filename: true,
   },
 };
 
