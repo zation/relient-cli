@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 require('@babel/polyfill');
 const babelrc = require('../../.babelrc');
-require('@babel/register')({
+require('@babel/register')(Object.assign({
   // This will override `node_modules` ignoring - you can alternatively pass
   // an array of strings to be explicitly matched or a regex / glob
   ignore: [(file) => {
@@ -11,8 +11,7 @@ require('@babel/register')({
     return file.match(/node_modules/);
   }],
   babelrc: false,
-  ...babelrc,
-});
+}, babelrc));
 const run = require('../tools/run').default;
 
 if (require.main === module && process.argv.length > 2) {

@@ -1,6 +1,6 @@
 {
   "name": "relient-cli",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "engines": {
     "node": ">=6.5",
     "npm": ">=3.10"
@@ -71,8 +71,6 @@
     "babel-eslint": "^8.0.2",
     "eslint": "^4.10.0",
     "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-loader": "^1.9.0",
-    "eslint-plugin-css-modules": "^2.7.5",
     "eslint-plugin-import": "^2.8.0",
     "husky": "^0.14.3",
     "lint-staged": "^5.0.0",
