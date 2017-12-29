@@ -1,14 +1,17 @@
 import requireDir from 'require-dir';
-import path from 'path';
+import { resolve } from 'path';
 import express, { Router } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import { forEach, flow } from 'lodash/fp';
+import { createMonitor } from 'watch';
 
 import getConfig from '../config';
 
-async function mocker() {
+const path = resolve('./mocker');
+
+const startServer = () => {
   const app = express();
   app.use(morgan('dev'));
   app.use(cors());
@@ -26,12 +29,29 @@ async function mocker() {
     forEach((module) => {
       module.default(router);
     }),
-  )(path.resolve('./mocker'));
+  )(path);
   app.use(router);
 
-  app.listen(getConfig('mockerPort'), () => {
+  return app.listen(getConfig('mockerPort'), () => {
     // eslint-disable-next-line
     console.log(`Mock server is running on port ${getConfig('mockerPort')}`);
+  });
+};
+
+async function mocker() {
+  let server = startServer();
+
+  createMonitor(path, (monitor) => {
+    monitor.on('changed', (file) => {
+      // eslint-disable-next-line no-underscore-dangle
+      delete require.cache[file];
+      // eslint-disable-next-line
+      console.log('Detect mock folder changed, restarting mock server...');
+      if (server && server.close) {
+        server.close();
+      }
+      server = startServer();
+    });
   });
 }
 
