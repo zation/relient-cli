@@ -2,6 +2,7 @@ import path from 'path';
 import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import * as base from './base';
 import getConfig from '../config';
 
@@ -105,19 +106,16 @@ const defaultClientWebpack = {
 
         // Minimize all JavaScript output of chunks
         // https://github.com/mishoo/UglifyJS2#compressor-options
-        new webpack.optimize.UglifyJsPlugin({
-          compress: {
-            warnings: isVerbose,
-            unused: true,
-            dead_code: true,
-            screw_ie8: true,
-          },
-          mangle: {
-            screw_ie8: true,
-          },
-          output: {
-            comments: false,
-            screw_ie8: true,
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            compress: {
+              warnings: isVerbose,
+              unused: true,
+              dead_code: true,
+            },
+            output: {
+              comments: false,
+            },
           },
           sourceMap: true,
         }),
