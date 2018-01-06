@@ -1,6 +1,6 @@
 {
   "name": "relient-cli",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "engines": {
     "node": ">=6.5",
     "npm": ">=3.10"
@@ -8,11 +8,13 @@
   "bin": {
     "relient": "./src/bin/relient.js"
   },
+  "peerDependencies": {
+    "@babel/polyfill": "7.0.0-beta.36"
+  },
   "dependencies": {
     "@babel/core": "7.0.0-beta.36",
     "@babel/plugin-transform-react-constant-elements": "7.0.0-beta.36",
     "@babel/plugin-transform-react-inline-elements": "7.0.0-beta.36",
-    "@babel/polyfill": "7.0.0-beta.36",
     "@babel/preset-env": "7.0.0-beta.36",
     "@babel/preset-flow": "7.0.0-beta.36",
     "@babel/preset-react": "7.0.0-beta.36",
