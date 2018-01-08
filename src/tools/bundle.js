@@ -13,6 +13,9 @@ function bundle() {
       }
 
       console.info(stats.toString(clientConfig.stats));
+      if (stats.hasErrors()) {
+        return reject(new Error('Webpack compilation errors'));
+      }
       return resolve();
     });
   });
