@@ -3,12 +3,13 @@ import webpack from 'webpack';
 import getConfig from '../config';
 
 export const isDebug = process.env.NODE_ENV !== 'production';
-export const isVerbose = process.argv.includes('--verbose');
 export const isAnalyze = process.argv.includes('--analyze') || process.argv.includes('--analyse');
 
 export const reScript = /\.(js|jsx|mjs)$/;
 export const reStyle = /\.(css|less|styl|scss|sass|sss)$/;
 export const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
+
+export const mode = isDebug ? 'development' : 'production';
 
 // CSS Nano options http://cssnano.co/
 const minimizeCssOptions = {
@@ -226,21 +227,8 @@ export const excludeDevModulesRules = isDebug
 // Don't attempt to continue if there are any errors.
 export const bail = !isDebug;
 
-export const cache = isDebug;
-
-// Specify what bundle information gets displayed
-// https://webpack.js.org/configuration/stats/
 export const stats = {
-  cached: isVerbose,
-  cachedAssets: isVerbose,
-  chunks: isVerbose,
-  chunkModules: isVerbose,
   colors: true,
-  hash: isVerbose,
-  modules: isVerbose,
-  reasons: isDebug,
-  timings: true,
-  version: isVerbose,
 };
 
 // Choose a developer tool to enhance debugging
@@ -249,7 +237,6 @@ export const devtool = isDebug ? 'cheap-module-inline-source-map' : 'source-map'
 
 export const plugins = [
   new webpack.DefinePlugin({
-    'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
     __DEV__: isDebug,
   }),
 ];

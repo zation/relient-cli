@@ -6,14 +6,12 @@ import getConfig, { serverConfig } from '../config';
 
 const {
   context,
-  isVerbose,
   resolve,
   styleRule,
   getJSRule,
   getStaticRules,
   excludeDevModulesRules,
   bail,
-  cache,
   stats,
   devtool,
   publicPath,
@@ -21,6 +19,7 @@ const {
   reStyle,
   reImage,
   plugins,
+  mode,
 } = base;
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));
@@ -29,6 +28,8 @@ const defaultServerWebpack = {
   name: 'server',
 
   target: 'node',
+
+  mode,
 
   entry: {
     server: ['@babel/polyfill', path.resolve('./src/server/index.js')],
@@ -39,7 +40,6 @@ const defaultServerWebpack = {
   output: {
     path: path.resolve('./build'),
     publicPath,
-    pathinfo: isVerbose,
     filename: '[name].js',
     chunkFilename: 'chunks/[name].js',
     libraryTarget: 'commonjs2',
@@ -65,8 +65,6 @@ const defaultServerWebpack = {
 
   bail,
 
-  cache,
-
   stats,
 
   devtool,
@@ -86,14 +84,6 @@ const defaultServerWebpack = {
     new webpack.DefinePlugin({
       __BROWSER__: false,
       __RELIENT_CONFIG__: JSON.stringify(serverConfig),
-    }),
-
-    // Adds a banner to the top of each generated chunk
-    // https://webpack.js.org/plugins/banner-plugin/
-    new webpack.BannerPlugin({
-      banner: 'require("source-map-support").install();',
-      raw: true,
-      entryOnly: false,
     }),
   ],
 
