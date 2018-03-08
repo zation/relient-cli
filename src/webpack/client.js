@@ -100,6 +100,7 @@ const defaultClientWebpack = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
+    __filename: true,
   },
 };
 
