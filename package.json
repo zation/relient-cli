@@ -1,6 +1,6 @@
 {
   "name": "relient-cli",
-  "version": "0.0.33",
+  "version": "0.0.34",
   "engines": {
     "node": ">=6.5",
     "npm": ">=3.10"
@@ -39,6 +39,7 @@
     "lodash": "^4.17.5",
     "mkdirp": "^0.5.1",
     "morgan": "^1.9.0",
+    "node-sass": "^4.7.2",
     "null-loader": "^0.1.1",
     "pixrem": "^4.0.1",
     "pleeease-filters": "^4.0.0",
@@ -60,6 +61,7 @@
     "react-error-overlay": "^4.0.0",
     "require-dir": "^1.0.0",
     "rimraf": "^2.6.2",
+    "sass-loader": "^6.0.7",
     "source-map-support": "^0.5.3",
     "svg-url-loader": "^2.3.1",
     "url-loader": "^0.6.2",
