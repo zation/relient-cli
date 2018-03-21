@@ -1,6 +1,6 @@
 {
   "name": "relient-cli",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "engines": {
     "node": ">=6.5",
     "npm": ">=3.10"
@@ -20,6 +20,7 @@
     "@babel/preset-react": "7.0.0-beta.40",
     "@babel/preset-stage-2": "7.0.0-beta.40",
     "@babel/register": "7.0.0-beta.40",
+    "app-module-path": "^2.2.0",
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^7.2.3",
     "babel-loader": "^8.0.0-beta.2",

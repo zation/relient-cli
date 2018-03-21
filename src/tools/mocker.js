@@ -6,10 +6,12 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import { forEach, flow } from 'lodash/fp';
 import { createMonitor } from 'watch';
+import { addPath } from 'app-module-path';
 
 import getConfig from '../config';
 
 const path = resolve('./mocker');
+addPath(resolve('./src'));
 
 const startServer = () => {
   const app = express();
