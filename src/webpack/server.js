@@ -70,7 +70,8 @@ const defaultServerWebpack = {
   devtool,
 
   externals: [
-    './assets.json',
+    './chunk-manifest.json',
+    './asset-manifest.json',
     nodeExternals({
       whitelist: [reStyle, reImage, /relient\/config(\/index)?$/],
     }),

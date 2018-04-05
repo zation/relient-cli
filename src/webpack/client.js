@@ -1,12 +1,14 @@
 import path from 'path';
 import webpack from 'webpack';
-import AssetsPlugin from 'assets-webpack-plugin';
+import WebpackAssetsManifest from 'webpack-assets-manifest';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import { writeFileSync } from 'fs';
 import * as base from './base';
 import getConfig from '../config';
 
 const {
   context,
+  isVerbose,
   isDebug,
   isAnalyze,
   resolve,
@@ -15,12 +17,12 @@ const {
   getStaticRules,
   excludeDevModulesRules,
   bail,
+  cache,
   stats,
   devtool,
   publicPath,
   devtoolModuleFilenameTemplate,
   plugins,
-  mode,
 } = base;
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));
@@ -29,8 +31,6 @@ const defaultClientWebpack = {
   name: 'client',
 
   target: 'web',
-
-  mode,
 
   entry: {
     client: ['@babel/polyfill', path.resolve('./src/client/index.js')],
@@ -41,6 +41,7 @@ const defaultClientWebpack = {
   output: {
     path: path.resolve('./build/public/assets'),
     publicPath,
+    pathinfo: isVerbose,
     filename: isDebug ? '[name].js' : '[name].[chunkhash:8].js',
     chunkFilename: isDebug ? '[name].chunk.js' : '[name].[chunkhash:8].chunk.js',
     devtoolModuleFilenameTemplate,
@@ -66,6 +67,8 @@ const defaultClientWebpack = {
 
   bail,
 
+  cache,
+
   stats,
 
   devtool,
@@ -80,11 +83,48 @@ const defaultClientWebpack = {
     }),
 
     // Emit a file with assets paths
-    // https://github.com/sporto/assets-webpack-plugin#options
-    new AssetsPlugin({
-      path: path.resolve('./build'),
-      filename: 'assets.json',
-      prettyPrint: true,
+    // https://github.com/webdeveric/webpack-assets-manifest#options
+    new WebpackAssetsManifest({
+      output: path.resolve('./build/asset-manifest.json'),
+      publicPath: true,
+      writeToDisk: true,
+      customize: ({ key, value }) => {
+        // You can prevent adding items to the manifest by returning false.
+        if (key.toLowerCase().endsWith('.map')) return false;
+        return { key, value };
+      },
+      done: (manifest, { compilation }) => {
+        // Write chunk-manifest.json.json
+        const chunkFileName = path.resolve('./build/chunk-manifest.json');
+        try {
+          const fileFilter = file => !file.endsWith('.map');
+          const addPath = file => manifest.getPublicPath(file);
+          const chunkFiles = compilation.chunkGroups.reduce((acc, c) => {
+            acc[c.name] = [
+              ...(acc[c.name] || []),
+              ...c.chunks.reduce(
+                (files, cc) => [
+                  ...files,
+                  ...cc.files.filter(fileFilter).map(addPath),
+                ],
+                [],
+              ),
+            ];
+            return acc;
+          }, Object.create(null));
+          writeFileSync(chunkFileName, JSON.stringify(chunkFiles, null, 2));
+        } catch (err) {
+          console.error(`ERROR: Cannot write ${chunkFileName}: `, err);
+          if (!isDebug) process.exit(1);
+        }
+      },
+    }),
+
+    // Move modules that occur in multiple entry chunks to a new entry chunk (the commons chunk).
+    // https://webpack.js.org/plugins/commons-chunk-plugin/
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: module => /node_modules/.test(module.resource),
     }),
 
     // Webpack Bundle Analyzer
@@ -100,7 +140,19 @@ const defaultClientWebpack = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
-    __filename: true,
+  },
+
+  // Move modules that occur in multiple entry chunks to a new entry chunk (the commons chunk).
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          chunks: 'initial',
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+        },
+      },
+    },
   },
 };
 
@@ -108,6 +160,6 @@ export default getConfig('clientWebpack')({
   config: defaultClientWebpack,
   ...base,
   webpack,
-  AssetsPlugin,
+  WebpackAssetsManifest,
   BundleAnalyzerPlugin,
 });
