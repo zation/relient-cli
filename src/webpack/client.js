@@ -8,7 +8,6 @@ import getConfig from '../config';
 
 const {
   context,
-  isVerbose,
   isDebug,
   isAnalyze,
   resolve,
@@ -23,6 +22,7 @@ const {
   publicPath,
   devtoolModuleFilenameTemplate,
   plugins,
+  mode,
 } = base;
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));
@@ -31,6 +31,8 @@ const defaultClientWebpack = {
   name: 'client',
 
   target: 'web',
+
+  mode,
 
   entry: {
     client: ['@babel/polyfill', path.resolve('./src/client/index.js')],
@@ -41,7 +43,6 @@ const defaultClientWebpack = {
   output: {
     path: path.resolve('./build/public/assets'),
     publicPath,
-    pathinfo: isVerbose,
     filename: isDebug ? '[name].js' : '[name].[chunkhash:8].js',
     chunkFilename: isDebug ? '[name].chunk.js' : '[name].[chunkhash:8].chunk.js',
     devtoolModuleFilenameTemplate,
@@ -133,6 +134,7 @@ const defaultClientWebpack = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
+    __filename: true,
   },
 
   // Move modules that occur in multiple entry chunks to a new entry chunk (the commons chunk).
