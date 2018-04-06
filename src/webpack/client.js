@@ -120,13 +120,6 @@ const defaultClientWebpack = {
       },
     }),
 
-    // Move modules that occur in multiple entry chunks to a new entry chunk (the commons chunk).
-    // https://webpack.js.org/plugins/commons-chunk-plugin/
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: module => /node_modules/.test(module.resource),
-    }),
-
     // Webpack Bundle Analyzer
     // https://github.com/th0r/webpack-bundle-analyzer
     ...(isAnalyze ? [new BundleAnalyzerPlugin()] : []),
