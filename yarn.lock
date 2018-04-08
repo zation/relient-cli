@@ -224,6 +224,13 @@
     "@babel/helper-plugin-utils" "7.0.0-beta.44"
     "@babel/plugin-syntax-class-properties" "7.0.0-beta.44"
 
+"@babel/plugin-proposal-decorators@^7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "http://registry.npm.taobao.org/@babel/plugin-proposal-decorators/download/@babel/plugin-proposal-decorators-7.0.0-beta.44.tgz#287ba7d320f58b45e8fb7148b0d06fc6692c8c0d"
+  dependencies:
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
+    "@babel/plugin-syntax-decorators" "7.0.0-beta.44"
+
 "@babel/plugin-proposal-export-namespace-from@7.0.0-beta.44":
   version "7.0.0-beta.44"
   resolved "http://registry.npm.taobao.org/@babel/plugin-proposal-export-namespace-from/download/@babel/plugin-proposal-export-namespace-from-7.0.0-beta.44.tgz#00ac9d8a28addd88599d356f098894ae3d8ec1de"
@@ -287,7 +294,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-beta.44"
 
-"@babel/plugin-syntax-decorators@^7.0.0-beta.44":
+"@babel/plugin-syntax-decorators@7.0.0-beta.44":
   version "7.0.0-beta.44"
   resolved "http://registry.npm.taobao.org/@babel/plugin-syntax-decorators/download/@babel/plugin-syntax-decorators-7.0.0-beta.44.tgz#f56e4ce94d67e0189532305af32b9d2ac2902e65"
   dependencies:

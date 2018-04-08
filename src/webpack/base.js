@@ -77,7 +77,7 @@ export const getJSRule = ({ targets }) => ({
       // Remove unnecessary React propTypes from the production build
       // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types
       ...(isDebug ? [] : ['transform-react-remove-prop-types']),
-      '@babel/plugin-syntax-decorators',
+      '@babel/plugin-proposal-decorators',
       ...getConfig('babelPlugins'),
     ],
   },
