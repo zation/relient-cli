@@ -2,14 +2,12 @@ import path from 'path';
 import webpack from 'webpack';
 import getConfig from '../config';
 
-export const isDebug = process.env.NODE_ENV !== 'production';
+export const isDev = process.env.NODE_ENV !== 'production';
 export const isAnalyze = process.argv.includes('--analyze') || process.argv.includes('--analyse');
 
 export const reScript = /\.(js|jsx|mjs)$/;
 export const reStyle = /\.(css|less|styl|scss|sass|sss)$/;
 export const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
-
-export const mode = isDebug ? 'development' : 'production';
 
 // CSS Nano options http://cssnano.co/
 const minimizeCssOptions = {
@@ -40,7 +38,7 @@ export const getJSRule = ({ targets }) => ({
   loader: 'babel-loader',
   options: {
     // https://github.com/babel/babel-loader#options
-    cacheDirectory: isDebug,
+    cacheDirectory: isDev,
 
     // https://babeljs.io/docs/usage/options/
     babelrc: false,
@@ -64,19 +62,19 @@ export const getJSRule = ({ targets }) => ({
       '@babel/preset-flow',
       // JSX
       // https://github.com/babel/babel/tree/master/packages/babel-preset-react
-      ['@babel/preset-react', { development: isDebug }],
+      ['@babel/preset-react', { development: isDev }],
     ],
     plugins: [
       // Treat React JSX elements as value types and hoist them to the highest scope
       // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-constant-elements
-      ...(isDebug ? [] : ['@babel/transform-react-constant-elements']),
+      ...(isDev ? [] : ['@babel/transform-react-constant-elements']),
       // Replaces the React.createElement function with one
       // that is more optimized for production
       // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-inline-elements
-      ...(isDebug ? [] : ['@babel/transform-react-inline-elements']),
+      ...(isDev ? [] : ['@babel/transform-react-inline-elements']),
       // Remove unnecessary React propTypes from the production build
       // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types
-      ...(isDebug ? [] : ['transform-react-remove-prop-types']),
+      ...(isDev ? [] : ['transform-react-remove-prop-types']),
       '@babel/plugin-proposal-decorators',
       ...getConfig('babelPlugins'),
     ],
@@ -97,8 +95,8 @@ export const styleRule = {
       exclude: path.resolve('./src'),
       loader: 'css-loader',
       options: {
-        sourceMap: isDebug,
-        minimize: isDebug ? false : minimizeCssOptions,
+        sourceMap: isDev,
+        minimize: isDev ? false : minimizeCssOptions,
       },
     },
 
@@ -108,8 +106,8 @@ export const styleRule = {
       include: path.resolve('./src'),
       loader: 'css-loader',
       options: {
-        sourceMap: isDebug,
-        minimize: isDebug ? false : minimizeCssOptions,
+        sourceMap: isDev,
+        minimize: isDev ? false : minimizeCssOptions,
       },
     },
 
@@ -121,14 +119,14 @@ export const styleRule = {
       options: {
         // CSS Loader https://github.com/webpack/css-loader
         importLoaders: 1,
-        sourceMap: isDebug,
+        sourceMap: isDev,
         // CSS Modules https://github.com/css-modules/css-modules
         modules: true,
-        localIdentName: isDebug
+        localIdentName: isDev
           ? '[name]-[local]-[hash:base64:5]'
           : '[hash:base64:5]',
         // CSS Nano http://cssnano.co/
-        minimize: isDebug ? false : minimizeCssOptions,
+        minimize: isDev ? false : minimizeCssOptions,
       },
     },
 
@@ -160,7 +158,7 @@ export const styleRule = {
   ],
 };
 
-const staticFileName = isDebug ? '[path][name].[ext]?[hash:8]' : '[hash:8].[ext]';
+const staticFileName = isDev ? '[path][name].[ext]?[hash:8]' : '[hash:8].[ext]';
 export const getStaticRules = ({
   emitFile,
 } = {}) => ([
@@ -216,7 +214,7 @@ export const getStaticRules = ({
   },
 ]);
 
-export const excludeDevModulesRules = isDebug
+export const excludeDevModulesRules = isDev
   ? []
   : [
     {
@@ -226,7 +224,7 @@ export const excludeDevModulesRules = isDebug
   ];
 
 // Don't attempt to continue if there are any errors.
-export const bail = !isDebug;
+export const bail = !isDev;
 
 export const stats = {
   colors: true,
@@ -234,10 +232,10 @@ export const stats = {
 
 // Choose a developer tool to enhance debugging
 // https://webpack.js.org/configuration/devtool/#devtool
-export const devtool = isDebug ? 'cheap-module-inline-source-map' : 'source-map';
+export const devtool = isDev ? 'cheap-module-inline-source-map' : 'source-map';
 
 export const plugins = [
   new webpack.DefinePlugin({
-    __DEV__: isDebug,
+    __DEV__: isDev,
   }),
 ];

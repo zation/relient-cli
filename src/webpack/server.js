@@ -19,7 +19,7 @@ const {
   reStyle,
   reImage,
   plugins,
-  mode,
+  isDev,
 } = base;
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));
@@ -29,7 +29,7 @@ const defaultServerWebpack = {
 
   target: 'node',
 
-  mode,
+  mode: isDev ? 'development' : 'none',
 
   entry: {
     server: ['@babel/polyfill', path.resolve('./src/server/index.js')],
@@ -86,6 +86,13 @@ const defaultServerWebpack = {
       __BROWSER__: false,
       __RELIENT_CONFIG__: JSON.stringify(serverConfig),
     }),
+
+    ...(isDev ? [] : [
+      new webpack.NamedModulesPlugin(),
+      new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+      new webpack.optimize.ModuleConcatenationPlugin(),
+      new webpack.NoEmitOnErrorsPlugin(),
+    ]),
   ],
 
   // Do not replace node globals with polyfills

@@ -224,7 +224,7 @@
     "@babel/helper-plugin-utils" "7.0.0-beta.44"
     "@babel/plugin-syntax-class-properties" "7.0.0-beta.44"
 
-"@babel/plugin-proposal-decorators@^7.0.0-beta.44":
+"@babel/plugin-proposal-decorators@7.0.0-beta.44":
   version "7.0.0-beta.44"
   resolved "http://registry.npm.taobao.org/@babel/plugin-proposal-decorators/download/@babel/plugin-proposal-decorators-7.0.0-beta.44.tgz#287ba7d320f58b45e8fb7148b0d06fc6692c8c0d"
   dependencies:
@@ -1106,7 +1106,7 @@ babel-eslint@^8.2.2:
     eslint-scope "~3.7.1"
     eslint-visitor-keys "^1.0.0"
 
-babel-loader@^8.0.0-beta.2:
+babel-loader@8.0.0-beta.2:
   version "8.0.0-beta.2"
   resolved "http://registry.npm.taobao.org/babel-loader/download/babel-loader-8.0.0-beta.2.tgz#4d5b67c964dc8c9cba866fd13d6b90df3acf8723"
   dependencies:

@@ -8,7 +8,7 @@ import getConfig from '../config';
 
 const {
   context,
-  isDebug,
+  isDev,
   isAnalyze,
   resolve,
   styleRule,
@@ -22,7 +22,6 @@ const {
   publicPath,
   devtoolModuleFilenameTemplate,
   plugins,
-  mode,
 } = base;
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));
@@ -32,7 +31,7 @@ const defaultClientWebpack = {
 
   target: 'web',
 
-  mode,
+  mode: isDev ? 'development' : 'production',
 
   entry: {
     client: ['@babel/polyfill', path.resolve('./src/client/index.js')],
@@ -43,8 +42,8 @@ const defaultClientWebpack = {
   output: {
     path: path.resolve('./build/public/assets'),
     publicPath,
-    filename: isDebug ? '[name].js' : '[name].[chunkhash:8].js',
-    chunkFilename: isDebug ? '[name].chunk.js' : '[name].[chunkhash:8].chunk.js',
+    filename: isDev ? '[name].js' : '[name].[chunkhash:8].js',
+    chunkFilename: isDev ? '[name].chunk.js' : '[name].[chunkhash:8].chunk.js',
     devtoolModuleFilenameTemplate,
   },
 
@@ -57,7 +56,7 @@ const defaultClientWebpack = {
       getJSRule({
         targets: {
           browsers: pkg.browserslist,
-          forceAllTransforms: !isDebug, // for UglifyJS
+          forceAllTransforms: !isDev, // for UglifyJS
         },
       }),
       styleRule,
@@ -116,7 +115,7 @@ const defaultClientWebpack = {
           writeFileSync(chunkFileName, JSON.stringify(chunkFiles, null, 2));
         } catch (err) {
           console.error(`ERROR: Cannot write ${chunkFileName}: `, err);
-          if (!isDebug) process.exit(1);
+          if (!isDev) process.exit(1);
         }
       },
     }),
