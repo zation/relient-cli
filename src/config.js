@@ -3,11 +3,9 @@ import {
   identity,
   isFunction,
   isNumber,
-  isString,
   isObject,
   forEach,
   isArray,
-  omit,
   prop,
 } from 'lodash/fp';
 import path from 'path';
@@ -18,9 +16,6 @@ const defaultConfig = {
   serverWebpack: prop('config'),
   postcss: identity,
   mockerPort: 9001,
-  serverAPIDomain: 'http://localhost:9001',
-  port: 3000,
-  clientConfigs: [],
   babelPlugins: [],
   proxy: {
     from: ['/api'],
@@ -34,9 +29,6 @@ const configSchema = [
   ['serverWebpack', isFunction, 'function'],
   ['postcss', isFunction, 'function'],
   ['mockerPort', isNumber, 'number'],
-  ['serverAPIDomain', isString, 'string'],
-  ['port', isNumber, 'number'],
-  ['clientConfigs', isArray, 'array'],
   ['babelPlugins', isArray, 'array'],
   ['proxy', isObject, 'object'],
 ];
@@ -51,16 +43,7 @@ forEach(([key, validate, type]) => {
   }
 })(configSchema);
 
-const config = {
+export default propertyOf({
   ...defaultConfig,
   ...customConfig,
-};
-
-export const serverConfig = omit([
-  'clientWebpack',
-  'serverWebpack',
-  'postcss',
-  'mockerPort',
-])(config);
-
-export default propertyOf(config);
+});

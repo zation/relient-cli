@@ -2,7 +2,7 @@ import path from 'path';
 import nodeExternals from 'webpack-node-externals';
 import webpack from 'webpack';
 import * as base from './base';
-import getConfig, { serverConfig } from '../config';
+import getConfig from '../config';
 
 const {
   context,
@@ -84,7 +84,6 @@ const defaultServerWebpack = {
     // https://webpack.js.org/plugins/define-plugin/
     new webpack.DefinePlugin({
       __BROWSER__: false,
-      __RELIENT_CONFIG__: JSON.stringify(serverConfig),
     }),
 
     ...(isDev ? [] : [

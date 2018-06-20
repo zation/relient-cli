@@ -1,10 +1,14 @@
 {
   "name": "relient-cli",
-  "version": "1.0.8",
+  "version": "2.0.0",
   "author": "Liu Yang <zation1@gmail.com>",
   "license": "MIT",
   "description": "Relient CLI is a cli wrapper of react-starter-kit. It also provides configuration and API mock tools.",
-  "keywords": ["react", "isomorphic", "cli"],
+  "keywords": [
+    "react",
+    "isomorphic",
+    "cli"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/zation/relient-cli.git"

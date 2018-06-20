@@ -1,7 +1,7 @@
 # Relient-CLI
 
 Relient CLI is a cli wrapper of [react-starter-kit](https://github.com/kriasoft/react-starter-kit).
-It also provides configuration and API mock tools.
+It also provides API mock.
 
 ## Install
 
@@ -76,8 +76,6 @@ Add `relient.config.js` in the root of your project to config relient. The defau
 ```js
 {
   mockerPort: 9001,
-  serverAPIDomain: 'http://localhost:9001',
-  port: 3000,
   clientConfigs: [],
   babelPlugins: [],
   proxy: {
@@ -88,15 +86,7 @@ Add `relient.config.js` in the root of your project to config relient. The defau
 }
 ```
 
-You can add your custom config in `relient.config.js` to overwrite the default value or add a new config value. Also you can use env variable to overwrite the config in `relient.config.js`.
-
-When you want to get config, you need [Relient](https://github.com/zation/relient):
-
-```js
-import getConfig from 'relient/config';
-
-getConfig('port');
-```
+You can add your custom config in `relient.config.js` to overwrite the default value or add a new config value.
 
 ## Mock
 
@@ -109,7 +99,7 @@ export default (router) => {
   router.post('/account', ({ body }, response) => {
     response.status(200).send(body);
   });
-  
+
   router.get('/account/all', (request, response) => {
     response.status(200).send([{ id: 1, name: 'A' }, { id: 2, name: 'B' }]);
   });
