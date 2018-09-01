@@ -56,8 +56,8 @@ const defaultClientWebpack = {
       getJSRule({
         targets: {
           browsers: pkg.browserslist,
-          forceAllTransforms: !isDev, // for UglifyJS
         },
+        forceAllTransforms: !isDev, // for UglifyJS
       }),
       styleRule,
       ...getStaticRules(),

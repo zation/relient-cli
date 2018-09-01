@@ -19,7 +19,8 @@ const kb = 1024;
 export const publicPath = '/assets/';
 
 // Point sourcemap entries to original disk location (format as URL on Windows)
-export const devtoolModuleFilenameTemplate = info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/');
+export const devtoolModuleFilenameTemplate = info => path.resolve(info.absoluteResourcePath)
+  .replace(/\\/g, '/');
 
 export const context = path.resolve('.');
 
@@ -54,9 +55,6 @@ export const getJSRule = ({ targets }) => ({
           debug: false,
         },
       ],
-      // Experimental ECMAScript proposals
-      // https://babeljs.io/docs/plugins/#presets-stage-x-experimental-presets-
-      '@babel/preset-stage-2',
       // Flow
       // https://github.com/babel/babel/tree/master/packages/babel-preset-flow
       '@babel/preset-flow',
@@ -65,6 +63,11 @@ export const getJSRule = ({ targets }) => ({
       ['@babel/preset-react', { development: isDev }],
     ],
     plugins: [
+      ['@babel/plugin-proposal-decorators', { legacy: true }],
+      '@babel/plugin-proposal-function-sent',
+      '@babel/plugin-proposal-export-namespace-from',
+      '@babel/plugin-proposal-numeric-separator',
+      '@babel/plugin-proposal-throw-expressions',
       // Treat React JSX elements as value types and hoist them to the highest scope
       // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-constant-elements
       ...(isDev ? [] : ['@babel/transform-react-constant-elements']),
@@ -75,7 +78,6 @@ export const getJSRule = ({ targets }) => ({
       // Remove unnecessary React propTypes from the production build
       // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types
       ...(isDev ? [] : ['transform-react-remove-prop-types']),
-      '@babel/plugin-proposal-decorators',
       ...getConfig('babelPlugins'),
     ],
   },
