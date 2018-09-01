@@ -602,10 +602,6 @@
     "@babel/plugin-transform-react-jsx-self" "^7.0.0"
     "@babel/plugin-transform-react-jsx-source" "^7.0.0"
 
-"@babel/preset-stage-2@^7.0.0":
-  version "7.0.0"
-  resolved "http://registry.npm.taobao.org/@babel/preset-stage-2/download/@babel/preset-stage-2-7.0.0.tgz#11ec31263c8466aad63829bba724607029ddf0a5"
-
 "@babel/register@^7.0.0":
   version "7.0.0"
   resolved "http://registry.npm.taobao.org/@babel/register/download/@babel/register-7.0.0.tgz#fa634bae1bfa429f60615b754fc1f1d745edd827"

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// eslint-disable-next-line import/no-unresolved
 require('@babel/polyfill');
 const babelrc = require('../../.babelrc');
 require('@babel/register')(Object.assign({

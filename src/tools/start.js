@@ -90,8 +90,7 @@ async function start() {
 
   // Configure server-side hot module replacement
   serverConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json';
-  serverConfig.output.hotUpdateChunkFilename =
-    'updates/[id].[hash].hot-update.js';
+  serverConfig.output.hotUpdateChunkFilename = 'updates/[id].[hash].hot-update.js';
   serverConfig.module.rules = serverConfig.module.rules.filter(notNullLoader);
   serverConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
@@ -163,8 +162,7 @@ async function start() {
           console.info(`${hmrPrefix}Nothing hot updated.`);
         } else {
           console.info(`${hmrPrefix}Updated modules:`);
-          updatedModules.forEach(moduleId =>
-            console.info(`${hmrPrefix} - ${moduleId}`),
+          updatedModules.forEach(moduleId => console.info(`${hmrPrefix} - ${moduleId}`),
           );
           checkForUpdate(true);
         }
@@ -207,17 +205,16 @@ async function start() {
   appPromiseResolve();
 
   // Launch the development server with Browsersync and HMR
-  await new Promise((resolve, reject) =>
-    browserSync.create().init(
-      {
-        // https://www.browsersync.io/docs/options
-        server: 'src/server/index.js',
-        middleware: [server],
-        open: !process.argv.includes('--silent'),
-        ...(isDebug ? {} : { notify: false, ui: false }),
-      },
-      (error, bs) => (error ? reject(error) : resolve(bs)),
-    ),
+  await new Promise((resolve, reject) => browserSync.create().init(
+    {
+      // https://www.browsersync.io/docs/options
+      server: 'src/server/index.js',
+      middleware: [server],
+      open: !process.argv.includes('--silent'),
+      ...(isDebug ? {} : { notify: false, ui: false }),
+    },
+    (error, bs) => (error ? reject(error) : resolve(bs)),
+  ),
   );
 
   const timeEnd = new Date();

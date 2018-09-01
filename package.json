@@ -1,6 +1,6 @@
 {
   "name": "relient-cli",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "author": "Liu Yang <zation1@gmail.com>",
   "license": "MIT",
   "description": "Relient CLI is a cli wrapper of react-starter-kit. It also provides configuration and API mock tools.",
@@ -21,7 +21,7 @@
     "relient": "./src/bin/relient.js"
   },
   "peerDependencies": {
-    "@babel/polyfill": "7.0.0-beta.44"
+    "@babel/polyfill": "^7.0.0"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
@@ -31,7 +31,6 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
-    "@babel/preset-stage-2": "^7.0.0",
     "@babel/register": "^7.0.0",
     "app-module-path": "^2.2.0",
     "autoprefixer": "^9.1.3",
