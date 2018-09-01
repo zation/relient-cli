@@ -14,7 +14,7 @@
     "url": "git://github.com/zation/relient-cli.git"
   },
   "engines": {
-    "node": ">=8.0",
+    "node": ">=9.10",
     "npm": ">=5.0"
   },
   "bin": {
@@ -91,12 +91,12 @@
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "babel-eslint": "^9.0.0",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.10.0",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "husky": "^0.14.3",
-    "lint-staged": "^7.0.4",
-    "prettier": "^1.11.1"
+    "lint-staged": "^7.2.2",
+    "prettier": "^1.14.2"
   },
   "lint-staged": {
     "*.{js,jsx}": [
