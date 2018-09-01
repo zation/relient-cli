@@ -1,6 +1,6 @@
 {
   "name": "relient-cli",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "author": "Liu Yang <zation1@gmail.com>",
   "license": "MIT",
   "description": "Relient CLI is a cli wrapper of react-starter-kit. It also provides configuration and API mock tools.",
@@ -30,6 +30,7 @@
     "@babel/plugin-proposal-function-sent": "^7.0.0",
     "@babel/plugin-proposal-numeric-separator": "^7.0.0",
     "@babel/plugin-proposal-throw-expressions": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/plugin-transform-react-constant-elements": "^7.0.0",
     "@babel/plugin-transform-react-inline-elements": "^7.0.0",
     "@babel/preset-env": "^7.0.0",

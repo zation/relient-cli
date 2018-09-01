@@ -68,6 +68,7 @@ export const getJSRule = ({ targets }) => ({
       '@babel/plugin-proposal-export-namespace-from',
       '@babel/plugin-proposal-numeric-separator',
       '@babel/plugin-proposal-throw-expressions',
+      '@babel/plugin-syntax-dynamic-import',
       // Treat React JSX elements as value types and hoist them to the highest scope
       // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-constant-elements
       ...(isDev ? [] : ['@babel/transform-react-constant-elements']),
