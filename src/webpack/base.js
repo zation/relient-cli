@@ -149,6 +149,9 @@ export const styleRule = {
     {
       test: /\.less$/,
       loader: 'less-loader',
+      options: {
+        javascriptEnabled: true,
+      },
     },
 
     // Compile Sass to CSS
