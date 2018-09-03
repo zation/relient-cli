@@ -30,6 +30,7 @@ async function copy() {
     ),
     copyFile('yarn.lock', 'build/yarn.lock'),
     copyDir('public', 'build/public'),
+    copyDir('config', 'build/config'),
   ]);
 
   if (process.argv.includes('--watch')) {
