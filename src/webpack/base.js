@@ -43,6 +43,7 @@ export const getJSRule = ({ targets }) => ({
 
     // https://babeljs.io/docs/usage/options/
     babelrc: false,
+    configFile: false,
     presets: [
       // A Babel preset that can automatically determine the Babel plugins and polyfills
       // https://github.com/babel/babel-preset-env
@@ -50,6 +51,7 @@ export const getJSRule = ({ targets }) => ({
         '@babel/preset-env',
         {
           targets,
+          forceAllTransforms: !isDev, // for UglifyJS
           modules: false,
           useBuiltIns: false,
           debug: false,
