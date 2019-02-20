@@ -112,9 +112,13 @@
     ]
   },
   "scripts": {
-    "precommit": "lint-staged",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
     "fix-js": "yarn run lint-js --fix",
     "fix": "yarn run fix-js && yarn run fix-css"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
