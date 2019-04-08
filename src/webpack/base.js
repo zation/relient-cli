@@ -9,11 +9,6 @@ export const reScript = /\.(js|jsx|mjs)$/;
 export const reStyle = /\.(css|less|styl|scss|sass|sss)$/;
 export const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
 
-// CSS Nano options http://cssnano.co/
-const minimizeCssOptions = {
-  discardComments: { removeAll: true },
-};
-
 const kb = 1024;
 
 export const publicPath = '/assets/';
@@ -71,17 +66,19 @@ export const getJSRule = ({ targets }) => ({
       '@babel/plugin-proposal-numeric-separator',
       '@babel/plugin-proposal-throw-expressions',
       '@babel/plugin-syntax-dynamic-import',
-      ['transform-class-properties', { spec: true }],
-      // Treat React JSX elements as value types and hoist them to the highest scope
-      // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-constant-elements
-      ...(isDev ? [] : ['@babel/transform-react-constant-elements']),
-      // Replaces the React.createElement function with one
-      // that is more optimized for production
-      // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-inline-elements
-      ...(isDev ? [] : ['@babel/transform-react-inline-elements']),
-      // Remove unnecessary React propTypes from the production build
-      // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types
-      ...(isDev ? [] : ['transform-react-remove-prop-types']),
+      '@babel/plugin-proposal-class-properties',
+      ...(isDev ? [] : [
+        // Treat React JSX elements as value types and hoist them to the highest scope
+        // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-constant-elements
+        '@babel/transform-react-constant-elements',
+        // Replaces the React.createElement function with one
+        // that is more optimized for production
+        // https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-react-inline-elements
+        '@babel/transform-react-inline-elements',
+        // Remove unnecessary React propTypes from the production build
+        // https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types
+        'transform-react-remove-prop-types',
+      ]),
       ...getConfig('babelPlugins'),
     ],
   },
@@ -102,7 +99,6 @@ export const styleRule = {
       loader: 'css-loader',
       options: {
         sourceMap: isDev,
-        minimize: isDev ? false : minimizeCssOptions,
       },
     },
 
@@ -113,7 +109,6 @@ export const styleRule = {
       loader: 'css-loader',
       options: {
         sourceMap: isDev,
-        minimize: isDev ? false : minimizeCssOptions,
       },
     },
 
@@ -131,8 +126,6 @@ export const styleRule = {
         localIdentName: isDev
           ? '[name]-[local]-[hash:base64:5]'
           : '[hash:base64:5]',
-        // CSS Nano http://cssnano.co/
-        minimize: isDev ? false : minimizeCssOptions,
       },
     },
 

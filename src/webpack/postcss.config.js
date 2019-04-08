@@ -1,6 +1,8 @@
 const path = require('path');
 const getConfig = require('../config').default;
 
+const isDev = process.env.NODE_ENV !== 'production';
+
 /* eslint-disable global-require */
 
 // eslint-disable-next-line
@@ -58,6 +60,10 @@ const defaultConfig = {
       browsers: pkg.browserslist,
       flexbox: 'no-2009',
     }),
+    ...(isDev ? [
+      // CSS Nano options http://cssnano.co/
+      require('cssnano')(),
+    ] : []),
   ],
 };
 
