@@ -122,10 +122,11 @@ export const styleRule = {
         importLoaders: 1,
         sourceMap: isDev,
         // CSS Modules https://github.com/css-modules/css-modules
-        modules: true,
-        localIdentName: isDev
-          ? '[name]-[local]-[hash:base64:5]'
-          : '[hash:base64:5]',
+        modules: {
+          localIdentName: isDev
+            ? '[name]-[local]-[hash:base64:5]'
+            : '[hash:base64:5]',
+        },
       },
     },
 

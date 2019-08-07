@@ -51,7 +51,7 @@ function createCompilationPromise(name, compiler, config) {
 }
 
 let server;
-const notPolyfill = entry => entry !== '@babel/polyfill' && entry !== 'babel-polyfill';
+const notPolyfill = entry => entry !== 'core-js/stable' && entry !== 'regenerator-runtime/runtime';
 const notNullLoader = ({ loader }) => loader !== 'null-loader';
 
 /**
@@ -70,9 +70,7 @@ async function start() {
   }
 
   // Configure client-side hot module replacement
-  clientConfig.entry.client = [path.resolve(__dirname, './lib/webpackHotDevClient.js')]
-    .concat(clientConfig.entry.client)
-    .sort((a, b) => b.includes('polyfill') - a.includes('polyfill'));
+  clientConfig.entry.client = [...clientConfig.entry.client, path.resolve(__dirname, './lib/webpackHotDevClient.js')];
   clientConfig.output.filename = clientConfig.output.filename.replace(
     'chunkhash',
     'hash',

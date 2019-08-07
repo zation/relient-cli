@@ -34,7 +34,7 @@ const defaultClientWebpack = {
   mode: isDev ? 'development' : 'production',
 
   entry: {
-    client: ['@babel/polyfill', path.resolve('./src/client/index.js')],
+    client: ['core-js/stable', 'regenerator-runtime/runtime', path.resolve('./src/client/index.js')],
   },
 
   context,

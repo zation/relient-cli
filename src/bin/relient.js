@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // eslint-disable-next-line import/no-unresolved
-require('@babel/polyfill');
+require('core-js/stable');
+require('regenerator-runtime/runtime');
 const babelrc = require('../../.babelrc');
 require('@babel/register')(Object.assign({
   // This will override `node_modules` ignoring - you can alternatively pass

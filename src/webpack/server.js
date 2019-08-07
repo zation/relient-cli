@@ -32,7 +32,7 @@ const defaultServerWebpack = {
   mode: isDev ? 'development' : 'none',
 
   entry: {
-    server: ['@babel/polyfill', path.resolve('./src/server/index.js')],
+    server: ['core-js/stable', 'regenerator-runtime/runtime', path.resolve('./src/server/index.js')],
   },
 
   context,
