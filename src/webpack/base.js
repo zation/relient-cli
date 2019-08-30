@@ -7,6 +7,8 @@ export const isAnalyze = process.argv.includes('--analyze') || process.argv.incl
 
 export const reScript = /\.(js|jsx|mjs)$/;
 export const reStyle = /\.(css|less|styl|scss|sass|sss)$/;
+export const reStyleWithModule = /[^_]\.(css|less|styl|scss|sass|sss)$/;
+export const reStyleWithoutModule = /_\.(css|less|styl|scss|sass|sss)$/;
 export const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
 
 const kb = 1024;
@@ -104,7 +106,7 @@ export const styleRule = {
 
     // Process internal/project styles without css module (from src folder)
     {
-      test: /_\./,
+      test: reStyleWithoutModule,
       include: path.resolve('./src'),
       loader: 'css-loader',
       options: {
@@ -114,7 +116,7 @@ export const styleRule = {
 
     // Process internal/project styles with css module (from src folder)
     {
-      test: /[^_]\./,
+      test: reStyleWithModule,
       include: path.resolve('./src'),
       loader: 'css-loader',
       options: {
