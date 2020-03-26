@@ -5,7 +5,7 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
-import proxy from 'http-proxy-middleware';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 import getConfig from '../config';
 import clientConfig from '../webpack/client';
 import serverConfig from '../webpack/server';
@@ -51,7 +51,7 @@ function createCompilationPromise(name, compiler, config) {
 }
 
 let server;
-const notPolyfill = entry => entry !== 'core-js/stable' && entry !== 'regenerator-runtime/runtime';
+const notPolyfill = (entry) => entry !== 'core-js/stable' && entry !== 'regenerator-runtime/runtime';
 const notNullLoader = ({ loader }) => loader !== 'null-loader';
 
 /**
@@ -66,7 +66,7 @@ async function start() {
   const proxyConfig = getConfig('proxy');
   if (proxyConfig) {
     const { from, ...proxyOptions } = proxyConfig;
-    server.use(from, proxy(proxyOptions));
+    server.use(from, createProxyMiddleware(proxyOptions));
   }
 
   // Configure client-side hot module replacement
@@ -80,7 +80,7 @@ async function start() {
     'hash',
   );
   clientConfig.module.rules = clientConfig.module.rules.filter(
-    x => x.loader !== 'null-loader',
+    (x) => x.loader !== 'null-loader',
   );
   clientConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
@@ -129,14 +129,14 @@ async function start() {
     if (!appPromiseIsResolved) return;
     appPromiseIsResolved = false;
     // eslint-disable-next-line no-return-assign
-    appPromise = new Promise(resolve => (appPromiseResolve = resolve));
+    appPromise = new Promise((resolve) => (appPromiseResolve = resolve));
   });
 
   let app;
   server.use((req, res) => {
     appPromise
       .then(() => app.handle(req, res))
-      .catch(error => console.error(error));
+      .catch((error) => console.error(error));
   });
 
   function checkForUpdate(fromUpdate) {
@@ -160,7 +160,7 @@ async function start() {
           console.info(`${hmrPrefix}Nothing hot updated.`);
         } else {
           console.info(`${hmrPrefix}Updated modules:`);
-          updatedModules.forEach(moduleId => console.info(`${hmrPrefix} - ${moduleId}`),
+          updatedModules.forEach((moduleId) => console.info(`${hmrPrefix} - ${moduleId}`),
           );
           checkForUpdate(true);
         }
