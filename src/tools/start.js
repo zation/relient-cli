@@ -207,6 +207,7 @@ async function start() {
     {
       // https://www.browsersync.io/docs/options
       server: 'src/server/index.js',
+      startPath: getConfig('baseUrl'),
       middleware: [server],
       open: !process.argv.includes('--silent'),
       ...(isDebug ? {} : { notify: false, ui: false }),

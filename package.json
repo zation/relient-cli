@@ -1,6 +1,6 @@
 {
   "name": "relient-cli",
-  "version": "2.6.5",
+  "version": "2.7.5",
   "author": "Liu Yang <zation1@gmail.com>",
   "license": "MIT",
   "description": "Relient CLI is a cli wrapper of react-starter-kit. It also provides configuration and API mock tools.",
@@ -104,13 +104,7 @@
     "lint-staged": "^10.0.8"
   },
   "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{json}": [
-      "git add"
-    ]
+    "*.{js,jsx}": "eslint --fix"
   },
   "scripts": {
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",

@@ -6,6 +6,7 @@ import {
   isObject,
   forEach,
   isArray,
+  isString,
   prop,
 } from 'lodash/fp';
 import path from 'path';
@@ -22,6 +23,7 @@ const defaultConfig = {
     target: 'http://localhost:9001',
     changeOrigin: true,
   },
+  baseUrl: '',
 };
 
 const configSchema = [
@@ -31,6 +33,7 @@ const configSchema = [
   ['mockerPort', isNumber, 'number'],
   ['babelPlugins', isArray, 'array'],
   ['proxy', isObject, 'object'],
+  ['baseUrl', isString, 'string'],
 ];
 
 const customConfigPath = path.resolve('./relient.config.js');
