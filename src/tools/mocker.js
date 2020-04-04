@@ -13,6 +13,9 @@ import getConfig from '../config';
 const path = resolve('./mocker');
 addPath(resolve('./src'));
 
+// eslint-disable-next-line no-underscore-dangle
+global.__BROWSER__ = false;
+
 const startServer = () => {
   const app = express();
   app.use(morgan('dev'));
