@@ -1,5 +1,6 @@
 // Babel configuration
 // https://babeljs.io/docs/usage/api/
+
 module.exports = {
   presets: [
     [
@@ -10,5 +11,7 @@ module.exports = {
         },
       },
     ],
+    // The features required by mocker may contain react icon code
+    '@babel/preset-react',
   ],
 };
