@@ -1,5 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
+import { getWithBaseUrl } from 'relient/url';
 import getConfig from '../config';
 
 export const isDev = process.env.NODE_ENV !== 'production';
@@ -13,7 +14,7 @@ export const reImage = /\.(bmp|gif|jpg|jpeg|png|svg)$/;
 
 const kb = 1024;
 
-export const publicPath = `${getConfig('baseUrl')}/assets/`;
+export const publicPath = getWithBaseUrl('/assets/', getConfig('baseUrl'));
 
 // Point sourcemap entries to original disk location (format as URL on Windows)
 export const devtoolModuleFilenameTemplate = (info) => path.resolve(info.absoluteResourcePath)
