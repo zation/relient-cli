@@ -83,6 +83,7 @@ Add `relient.config.js` in the root of your project to config relient. The defau
     target: 'http://localhost:9001',
     changeOrigin: true,
   },
+  baseUrl: '/admin', // This will be used to webpack public path and browserSync startPath
 }
 ```
 
