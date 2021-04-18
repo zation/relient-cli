@@ -18,6 +18,7 @@ const defaultConfig = {
   postcss: identity,
   mockerPort: 9001,
   babelPlugins: [],
+  babelPresets: [],
   proxy: {
     from: ['/api'],
     target: 'http://localhost:9001',
@@ -32,6 +33,7 @@ const configSchema = [
   ['postcss', isFunction, 'function'],
   ['mockerPort', isNumber, 'number'],
   ['babelPlugins', isArray, 'array'],
+  ['babelPresets', isArray, 'array'],
   ['proxy', isObject, 'object'],
   ['baseUrl', isString, 'string'],
 ];

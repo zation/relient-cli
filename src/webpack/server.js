@@ -20,6 +20,7 @@ const {
   reImage,
   plugins,
   isDev,
+  resolveLoader,
 } = base;
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));
@@ -47,6 +48,8 @@ const defaultServerWebpack = {
   },
 
   resolve,
+
+  resolveLoader,
 
   module: {
     // Make missing exports an error instead of warning

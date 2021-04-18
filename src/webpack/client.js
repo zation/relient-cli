@@ -22,6 +22,7 @@ const {
   publicPath,
   devtoolModuleFilenameTemplate,
   plugins,
+  resolveLoader,
 } = base;
 // eslint-disable-next-line
 const pkg = require(path.resolve('./package.json'));
@@ -48,6 +49,8 @@ const defaultClientWebpack = {
   },
 
   resolve,
+
+  resolveLoader,
 
   module: {
     // Make missing exports an error instead of warning
@@ -97,8 +100,8 @@ const defaultClientWebpack = {
         // Write chunk-manifest.json.json
         const chunkFileName = path.resolve('./build/chunk-manifest.json');
         try {
-          const fileFilter = file => !file.endsWith('.map');
-          const addPath = file => manifest.getPublicPath(file);
+          const fileFilter = (file) => !file.endsWith('.map');
+          const addPath = (file) => manifest.getPublicPath(file);
           const chunkFiles = compilation.chunkGroups.reduce((acc, c) => {
             acc[c.name] = [
               ...(acc[c.name] || []),

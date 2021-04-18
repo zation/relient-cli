@@ -6,7 +6,7 @@ import getConfig from '../config';
 export const isDev = process.env.NODE_ENV !== 'production';
 export const isAnalyze = process.argv.includes('--analyze') || process.argv.includes('--analyse');
 
-export const reScript = /\.(js|jsx|mjs)$/;
+export const reScript = /\.(ts|tsx|js|jsx|mjs)$/;
 export const reStyle = /\.(css|less|styl|scss|sass|sss)$/;
 export const reStyleWithModule = /[^_]\.(css|less|styl|scss|sass|sss)$/;
 export const reStyleWithoutModule = /_\.(css|less|styl|scss|sass|sss)$/;
@@ -26,6 +26,11 @@ export const resolve = {
   // Allow absolute paths in imports, e.g. import Button from 'components/Button'
   // Keep in sync with .flowconfig and .eslintrc
   modules: ['node_modules', 'src'],
+  extensions: ['.ts', '.tsx', '.js', '.json'],
+};
+
+export const resolveLoader = {
+  extensions: ['.ts', '.js', '.json'],
 };
 
 export const getJSRule = ({ targets }) => ({
@@ -55,12 +60,13 @@ export const getJSRule = ({ targets }) => ({
           debug: false,
         },
       ],
-      // Flow
-      // https://github.com/babel/babel/tree/master/packages/babel-preset-flow
-      '@babel/preset-flow',
       // JSX
       // https://github.com/babel/babel/tree/master/packages/babel-preset-react
       ['@babel/preset-react', { development: isDev }],
+
+      '@babel/preset-typescript',
+
+      ...getConfig('babelPresets'),
     ],
     plugins: [
       ['@babel/plugin-proposal-decorators', { legacy: true }],
