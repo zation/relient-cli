@@ -76,7 +76,7 @@
     "postcss-nesting": "^7.0.1",
     "postcss-selector-matches": "^4.0.0",
     "postcss-selector-not": "^4.0.0",
-    "react-dev-utils": "^10.2.1",
+    "react-dev-utils": "^11.0.4",
     "react-error-overlay": "^6.0.7",
     "regenerator-runtime": "^0.13.5",
     "relient": ">=5.1.3",
