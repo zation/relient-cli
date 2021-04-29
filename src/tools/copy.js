@@ -1,6 +1,6 @@
 import path from 'path';
 import chokidar from 'chokidar';
-import { writeFile, copyFile, makeDir, copyDir, cleanDir } from './lib/fs';
+import { copyFile, makeDir, copyDir, cleanDir } from './lib/fs';
 import { format } from './run';
 
 // eslint-disable-next-line
@@ -13,22 +13,8 @@ const pkg = require(path.resolve('./package.json'));
 async function copy() {
   await makeDir('build');
   await Promise.all([
-    writeFile(
-      'build/package.json',
-      JSON.stringify(
-        {
-          private: true,
-          engines: pkg.engines,
-          dependencies: pkg.dependencies,
-          scripts: {
-            start: 'node server.js',
-          },
-        },
-        null,
-        2,
-      ),
-    ),
     copyFile('yarn.lock', 'build/yarn.lock'),
+    copyFile('package.json', 'build/package.json'),
     copyDir('public', 'build/public'),
     copyDir('config', 'build/config'),
   ]);
