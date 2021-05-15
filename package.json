@@ -1,6 +1,6 @@
 {
   "name": "relient-cli",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "author": "Liu Yang <zation1@gmail.com>",
   "license": "MIT",
   "description": "Relient CLI is a cli wrapper of react-starter-kit. It also provides configuration and API mock tools.",

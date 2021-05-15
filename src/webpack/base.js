@@ -136,8 +136,8 @@ export const styleRule = {
         // CSS Modules https://github.com/css-modules/css-modules
         modules: {
           localIdentName: isDev
-            ? '[name]-[local]-[fullhash:base64:5]'
-            : '[fullhash:base64:5]',
+            ? '[path][name]__[local]'
+            : '[hash:base64:5]',
         },
       },
     },
