@@ -6595,7 +6595,7 @@ postcss@^7.0.2, postcss@^7.0.5, postcss@^7.0.7:
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-postcss@^8.2.10:
+postcss@^8.2.10, postcss@^8.2.15:
   version "8.2.15"
   resolved "https://registry.nlark.com/postcss/download/postcss-8.2.15.tgz#9e66ccf07292817d226fc315cbbf9bc148fbca65"
   integrity sha1-nmbM8HKSgX0ib8MVy7+bwUj7ymU=

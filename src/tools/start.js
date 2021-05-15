@@ -64,11 +64,11 @@ async function start() {
   clientConfig.entry.client = [...clientConfig.entry.client, path.resolve(__dirname, './lib/webpackHotDevClient.js')];
   clientConfig.output.filename = clientConfig.output.filename.replace(
     'chunkhash',
-    'hash',
+    'fullhash',
   );
   clientConfig.output.chunkFilename = clientConfig.output.chunkFilename.replace(
     'chunkhash',
-    'hash',
+    'fullhash',
   );
   clientConfig.module.rules = clientConfig.module.rules.filter(
     (x) => x.loader !== 'null-loader',
@@ -78,8 +78,8 @@ async function start() {
   );
 
   // Configure server-side hot module replacement
-  serverConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json';
-  serverConfig.output.hotUpdateChunkFilename = 'updates/[id].[hash].hot-update.js';
+  serverConfig.output.hotUpdateMainFilename = 'updates/[fullhash].hot-update.json';
+  serverConfig.output.hotUpdateChunkFilename = 'updates/[id].[fullhash].hot-update.js';
   serverConfig.module.rules = serverConfig.module.rules.filter(notNullLoader);
   serverConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),

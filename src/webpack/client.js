@@ -97,7 +97,7 @@ const defaultClientWebpack = {
         return { key, value };
       },
       done: (manifest, { compilation }) => {
-        // Write chunk-manifest.json.json
+        // Write chunk-manifest.json
         const chunkFileName = path.resolve('./build/chunk-manifest.json');
         try {
           const fileFilter = (file) => !file.endsWith('.map');
@@ -108,7 +108,7 @@ const defaultClientWebpack = {
               ...c.chunks.reduce(
                 (files, cc) => [
                   ...files,
-                  ...cc.files.filter(fileFilter).map(addPath),
+                  ...Array.from(cc.files).filter(fileFilter).map(addPath),
                 ],
                 [],
               ),

@@ -133,8 +133,8 @@ export const styleRule = {
         // CSS Modules https://github.com/css-modules/css-modules
         modules: {
           localIdentName: isDev
-            ? '[name]-[local]-[hash:base64:5]'
-            : '[hash:base64:5]',
+            ? '[name]-[local]-[fullhash:base64:5]'
+            : '[fullhash:base64:5]',
         },
       },
     },
@@ -172,7 +172,7 @@ export const styleRule = {
   ],
 };
 
-const staticFileName = isDev ? '[path][name].[ext]?[hash:8]' : '[hash:8].[ext]';
+const staticFileName = isDev ? '[path][name].[ext]?[fullhash:8]' : '[fullhash:8].[ext]';
 export const getStaticRules = ({
   emitFile,
 } = {}) => ([
