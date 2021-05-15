@@ -14,15 +14,6 @@ import clean from './clean';
 
 const isDebug = process.env.NODE_ENV !== 'production';
 
-// https://webpack.js.org/configuration/watch/#watchoptions
-const watchOptions = {
-  // Watching may not work with NFS and machines in VirtualBox
-  // Uncomment next line if it is your case (use true or interval in milliseconds)
-  // poll: true,
-  // Decrease CPU or memory usage in some file systems
-  // ignored: /node_modules/,
-};
-
 function createCompilationPromise(name, compiler, config) {
   return new Promise((resolve, reject) => {
     let timeStart = new Date();
@@ -111,13 +102,7 @@ async function start() {
   );
 
   // https://github.com/webpack/webpack-dev-middleware
-  server.use(
-    webpackDevMiddleware(clientCompiler, {
-      publicPath: clientConfig.output.publicPath,
-      logLevel: 'silent',
-      watchOptions,
-    }),
-  );
+  server.use(webpackDevMiddleware(clientCompiler));
 
   // https://github.com/glenjamin/webpack-hot-middleware
   server.use(webpackHotMiddleware(clientCompiler, { log: false }));
@@ -180,7 +165,7 @@ async function start() {
       });
   }
 
-  serverCompiler.watch(watchOptions, (error, stats) => {
+  serverCompiler.watch({}, (error, stats) => {
     if (app && !error && !stats.hasErrors()) {
       checkForUpdate().then(() => {
         appPromiseIsResolved = true;

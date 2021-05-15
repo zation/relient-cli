@@ -76,7 +76,7 @@ const defaultServerWebpack = {
     './chunk-manifest.json',
     './asset-manifest.json',
     nodeExternals({
-      whitelist: [reStyle, reImage, /relient\/config(\/index)?$/],
+      allowlist: [reStyle, reImage, /relient\/config(\/index)?$/],
     }),
   ],
 
@@ -100,10 +100,7 @@ const defaultServerWebpack = {
   // Do not replace node globals with polyfills
   // https://webpack.js.org/configuration/node/
   node: {
-    console: false,
     global: false,
-    process: false,
-    Buffer: false,
     __dirname: false,
     __filename: true,
   },

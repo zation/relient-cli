@@ -143,8 +143,8 @@ export const styleRule = {
     {
       loader: 'postcss-loader',
       options: {
-        config: {
-          path: path.resolve(__dirname, './postcss.config.js'),
+        postcssOptions: {
+          config: path.resolve(__dirname, './postcss.config.js'),
         },
       },
     },
@@ -156,7 +156,9 @@ export const styleRule = {
       test: /\.less$/,
       loader: 'less-loader',
       options: {
-        javascriptEnabled: true,
+        lessOptions: {
+          javascriptEnabled: true,
+        },
       },
     },
 
@@ -244,7 +246,7 @@ export const stats = {
 
 // Choose a developer tool to enhance debugging
 // https://webpack.js.org/configuration/devtool/#devtool
-export const devtool = isDev ? 'cheap-module-inline-source-map' : 'source-map';
+export const devtool = isDev ? 'inline-cheap-module-source-map' : 'source-map';
 
 export const plugins = [
   new webpack.DefinePlugin({

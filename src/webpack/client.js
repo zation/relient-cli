@@ -133,9 +133,6 @@ const defaultClientWebpack = {
   // https://webpack.js.org/configuration/node/
   // https://github.com/webpack/node-libs-browser/tree/master/mock
   node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
     __filename: true,
   },
 
