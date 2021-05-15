@@ -108,6 +108,7 @@ export const styleRule = {
       loader: 'css-loader',
       options: {
         sourceMap: isDev,
+        esModule: false,
       },
     },
 
@@ -118,6 +119,7 @@ export const styleRule = {
       loader: 'css-loader',
       options: {
         sourceMap: isDev,
+        esModule: false,
       },
     },
 
@@ -130,6 +132,7 @@ export const styleRule = {
         // CSS Loader https://github.com/webpack/css-loader
         importLoaders: 1,
         sourceMap: isDev,
+        esModule: false,
         // CSS Modules https://github.com/css-modules/css-modules
         modules: {
           localIdentName: isDev
