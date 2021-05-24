@@ -2,7 +2,7 @@ import run from './run';
 import clean from './clean';
 import copy from './copy';
 import bundle from './bundle';
-import render from './render';
+import exportRoutes from './exportRoutes';
 
 /**
  * Compiles the project from source files into a distributable
@@ -14,7 +14,7 @@ async function build() {
   await run(bundle);
 
   if (process.argv.includes('--static')) {
-    await run(render);
+    await run(exportRoutes);
   }
 }
 

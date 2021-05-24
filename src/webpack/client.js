@@ -3,6 +3,7 @@ import webpack from 'webpack';
 import WebpackAssetsManifest from 'webpack-assets-manifest';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { writeFileSync } from 'fs';
+import { stripUrl } from 'relient/url';
 import * as base from './base';
 import getConfig from '../config';
 
@@ -41,7 +42,7 @@ const defaultClientWebpack = {
   context,
 
   output: {
-    path: path.resolve('./build/public/assets'),
+    path: path.resolve(stripUrl(`./build/public/${getConfig('baseUrl')}/assets/`)),
     publicPath,
     filename: isDev ? '[name].js' : '[name].[chunkhash:8].js',
     chunkFilename: isDev ? '[name].chunk.js' : '[name].[chunkhash:8].chunk.js',
