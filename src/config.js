@@ -17,6 +17,7 @@ const defaultConfig = {
   serverWebpack: prop('config'),
   postcss: identity,
   mockerPort: 9001,
+  exportRoutes: ['/'],
   babelPlugins: [],
   babelPresets: [],
   proxy: {
@@ -34,6 +35,7 @@ const configSchema = [
   ['mockerPort', isNumber, 'number'],
   ['babelPlugins', isArray, 'array'],
   ['babelPresets', isArray, 'array'],
+  ['exportRoutes', isArray, 'array'],
   ['proxy', isObject, 'object'],
   ['baseUrl', isString, 'string'],
 ];

@@ -2,27 +2,10 @@ import path from 'path';
 import fetch from 'node-fetch';
 import { writeFile, makeDir } from './lib/fs';
 import runServer from './runServer';
+import getConfig from '../config';
 
 // Enter your paths here which you want to render as static
-// Example:
-// const routes = [
-//   '/',           // => build/public/index.html
-//   '/page',       // => build/public/page.html
-//   '/page/',      // => build/public/page/index.html
-//   '/page/name',  // => build/public/page/name.html
-//   '/page/name/', // => build/public/page/name/index.html
-// ];
-const routes = [
-  '/',
-  '/contact',
-  '/login',
-  '/register',
-  '/about',
-  '/privacy',
-  '/404', // https://help.github.com/articles/creating-a-custom-404-page-for-your-github-pages-site/
-];
-
-async function render() {
+async function exportRoutes() {
   const server = await runServer();
 
   // add dynamic routes
@@ -33,7 +16,7 @@ async function render() {
   // ));
 
   await Promise.all(
-    routes.map(async (route, index) => {
+    getConfig('exportRoutes').map(async (route, index) => {
       const url = `http://${server.host}${route}`;
       const fileName = route.endsWith('/')
         ? 'index.html'
@@ -61,4 +44,4 @@ async function render() {
   server.kill('SIGTERM');
 }
 
-export default render;
+export default exportRoutes;
