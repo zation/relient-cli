@@ -175,7 +175,7 @@ export const styleRule = {
   ],
 };
 
-const staticFileName = isDev ? '[path][name].[ext]?[fullhash:8]' : '[fullhash:8].[ext]';
+const staticFileName = isDev ? '[path][name].[ext]?[hash:8]' : '[hash:8].[ext]';
 export const getStaticRules = ({
   emitFile,
 } = {}) => ([
