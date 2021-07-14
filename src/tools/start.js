@@ -6,6 +6,7 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
 import { createProxyMiddleware } from 'http-proxy-middleware';
+import { forEach } from 'lodash/fp';
 import getConfig from '../config';
 import clientConfig from '../webpack/client';
 import serverConfig from '../webpack/server';
@@ -54,9 +55,20 @@ async function start() {
   server = express();
   server.use(errorOverlayMiddleware());
   server.use(express.static(path.resolve('./public')));
+  const proxiesConfig = getConfig('proxies');
+  if (proxiesConfig) {
+    forEach(({ from, ...proxyOptions }) => {
+      // eslint-disable-next-line
+      console.log(`Proxy for: ${from}`);
+      server.use(from, createProxyMiddleware(proxyOptions));
+    })(proxiesConfig);
+  }
+
   const proxyConfig = getConfig('proxy');
-  if (proxyConfig) {
+  if (!proxiesConfig && proxyConfig) {
     const { from, ...proxyOptions } = proxyConfig;
+    // eslint-disable-next-line
+    console.log(`Proxy for: ${from}`);
     server.use(from, createProxyMiddleware(proxyOptions));
   }
 
@@ -198,8 +210,7 @@ async function start() {
       ...(isDebug ? {} : { notify: false, ui: false }),
     },
     (error, bs) => (error ? reject(error) : resolve(bs)),
-  ),
-  );
+  ));
 
   const timeEnd = new Date();
   const time = timeEnd.getTime() - timeStart.getTime();

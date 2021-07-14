@@ -25,6 +25,7 @@ const defaultConfig = {
     target: 'http://localhost:9001',
     changeOrigin: true,
   },
+  proxies: [],
   baseUrl: '',
 };
 
@@ -36,7 +37,8 @@ const configSchema = [
   ['babelPlugins', isArray, 'array'],
   ['babelPresets', isArray, 'array'],
   ['exportRoutes', isArray, 'array'],
-  ['proxy', isObject, 'object'],
+  ['proxy', (value) => isObject(value) && !isArray(value), 'object'],
+  ['proxies', isArray, 'array'],
   ['baseUrl', isString, 'string'],
 ];
 
