@@ -56,7 +56,7 @@ async function start() {
   server.use(errorOverlayMiddleware());
   server.use(express.static(path.resolve('./public')));
   const proxiesConfig = getConfig('proxies');
-  if (proxiesConfig) {
+  if (proxiesConfig && proxiesConfig.length > 0) {
     forEach(({ from, ...proxyOptions }) => {
       // eslint-disable-next-line
       console.log(`Proxy for: ${from}`);
@@ -65,7 +65,7 @@ async function start() {
   }
 
   const proxyConfig = getConfig('proxy');
-  if (!proxiesConfig && proxyConfig) {
+  if ((!proxiesConfig || proxiesConfig.length === 0) && proxyConfig) {
     const { from, ...proxyOptions } = proxyConfig;
     // eslint-disable-next-line
     console.log(`Proxy for: ${from}`);
